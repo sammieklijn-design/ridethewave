@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ride the Wave — 3 richtingen</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Poppins',sans-serif;background:#FBF7EC;color:#2E4F8E;min-height:100vh;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px}
+  h1{font-size:clamp(28px,5vw,46px);font-weight:800;margin-bottom:8px;text-align:center}
+  p.sub{color:#5C6B86;font-size:18px;margin-bottom:48px;text-align:center}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:980px;width:100%}
+  a.card{display:block;text-decoration:none;border-radius:18px;padding:32px 28px;color:#fff;
+         transition:transform .15s ease,box-shadow .15s ease;box-shadow:0 10px 30px rgba(46,79,142,.12)}
+  a.card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(46,79,142,.2)}
+  .c1{background:linear-gradient(135deg,#2FAE97,#F2785C)}
+  .c2{background:linear-gradient(135deg,#15181C,#00C2B2)}
+  .c3{background:linear-gradient(135deg,#C25B43,#E8765B)}
+  .tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:.9;font-weight:600}
+  .name{font-size:26px;font-weight:800;margin:6px 0 10px}
+  .quote{font-size:14px;opacity:.92;line-height:1.4}
+  .open{margin-top:18px;font-weight:600;font-size:14px}
+  footer{margin-top:48px;color:#5C6B86;font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+  <h1>Ride the Wave</h1>
+  <p class="sub">Eén merk, drie richtingen — klik om de campagnesite te openen.</p>
+  <div class="grid">
+    <a class="card c1" href="catch-the-energy/index.html">
+      <div class="tag">Richting 01 · Speels &amp; kleurrijk</div>
+      <div class="name">Catch the Energy</div>
+      <div class="quote">"Begin gewoon. Pak je golf." — knalkleuren, stickers en pure energie.</div>
+      <div class="open">Open website →</div>
+    </a>
+    <a class="card c2" href="find-your-flow/index.html">
+      <div class="tag">Richting 02 · Stoer &amp; sportief</div>
+      <div class="name">Find Your Flow</div>
+      <div class="quote">"Geen excuses. Het water wacht." — rauw, atletisch en hoog contrast.</div>
+      <div class="open">Open website →</div>
+    </a>
+    <a class="card c3" href="iedere-golf-een-verhaal/index.html">
+      <div class="tag">Richting 03 · Warm &amp; persoonlijk</div>
+      <div class="name">Iedere Golf een Verhaal</div>
+      <div class="quote">"Iedereen verdient een nieuwe golf." — warm, editorial en menselijk.</div>
+      <div class="open">Open website →</div>
+    </a>
+  </div>
+  <footer>Door Spring Marketing Agency · prototypes voor de pitch</footer>
+</body>
+</html>

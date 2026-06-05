@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ride the Wave · Pak jouw eerste golf</title>
+<meta name="description" content="Surfen leren? Kosteloos, met een leuke crew. Ride the Wave geeft jongeren van 14–23 jaar de kracht van de zee. Spring erin!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#F4E882;
+    --teal:#2FAE97;
+    --coral:#F2785C;
+    --blue:#2E4F8E;
+    --cream:#FBF7EC;
+    --blue-soft:rgba(46,79,142,.12);
+    --shadow:0 14px 34px rgba(46,79,142,.16);
+    --shadow-sm:0 6px 16px rgba(46,79,142,.12);
+    --radius:26px;
+    --radius-lg:38px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',system-ui,sans-serif;
+    color:var(--blue);
+    background:var(--cream);
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-weight:800;line-height:1.1;letter-spacing:-.5px}
+  h2{font-size:clamp(1.9rem,4.5vw,3.1rem)}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+  section{position:relative}
+
+  /* ===== Buttons ===== */
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-weight:700;font-size:1rem;
+    padding:.95rem 1.7rem;border-radius:999px;
+    border:none;cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    box-shadow:var(--shadow-sm);
+  }
+  .btn-coral{background:var(--coral);color:#fff}
+  .btn-coral:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 16px 30px rgba(242,120,92,.45)}
+  .btn-blue{background:var(--blue);color:#fff}
+  .btn-blue:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(46,79,142,.4)}
+  .btn-ghost{background:#fff;color:var(--blue);border:2.5px solid var(--blue)}
+  .btn-ghost:hover{transform:translateY(-3px);background:var(--blue);color:#fff}
+  .btn-teal{background:var(--teal);color:#fff}
+  .btn-teal:hover{transform:translateY(-3px) rotate(1deg);box-shadow:0 16px 30px rgba(47,174,151,.45)}
+
+  /* ===== Stickers ===== */
+  .sticker{
+    font-family:'Caveat',cursive;font-weight:700;
+    display:inline-block;
+    background:var(--yellow);color:var(--blue);
+    padding:.35rem 1.1rem;border-radius:14px;
+    box-shadow:0 6px 14px rgba(46,79,142,.22);
+    transform:rotate(-5deg);
+    font-size:clamp(1.2rem,2.5vw,1.7rem);
+    line-height:1.1;
+  }
+  .sticker.teal{background:var(--teal);color:#fff}
+  .sticker.coral{background:var(--coral);color:#fff}
+  .scribble{font-family:'Caveat',cursive;font-weight:700;color:var(--coral);font-size:1.5rem;line-height:1}
+
+  /* ===== Nav ===== */
+  header.nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(251,247,236,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--blue-soft);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;gap:1rem}
+  .nav-logo img{height:46px;width:auto}
+  .nav-links{display:flex;align-items:center;gap:1.8rem}
+  .nav-links a.link{font-weight:600;position:relative;padding:.2rem 0}
+  .nav-links a.link::after{
+    content:"";position:absolute;left:0;bottom:-3px;width:0;height:3px;
+    background:var(--coral);border-radius:3px;transition:width .25s ease;
+  }
+  .nav-links a.link:hover::after{width:100%}
+  .nav-toggle{display:none;background:var(--blue);border:none;border-radius:14px;padding:.55rem .65rem;cursor:pointer}
+  .nav-toggle span{display:block;width:26px;height:3px;background:#fff;border-radius:3px;margin:5px 0;transition:.3s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+  /* ===== Hero ===== */
+  .hero{padding:clamp(2.5rem,6vw,5rem) 0 clamp(3rem,7vw,6rem);overflow:hidden}
+  .sunburst{
+    position:absolute;top:-30%;right:-15%;width:75vw;height:75vw;max-width:900px;max-height:900px;
+    background:repeating-conic-gradient(from 0deg, rgba(244,232,130,.55) 0deg 9deg, transparent 9deg 18deg);
+    border-radius:50%;z-index:0;opacity:.5;
+    pointer-events:none;
+  }
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,4rem);align-items:center}
+  .hero h1{font-size:clamp(2.6rem,7vw,5rem);color:var(--blue)}
+  .hero h1 .hl{color:var(--coral)}
+  .hero p.sub{font-size:clamp(1.1rem,2.2vw,1.4rem);font-weight:500;margin:1.3rem 0 1.9rem;max-width:30ch}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+  .hero-proof{display:flex;align-items:center;gap:.6rem;margin-top:1.8rem;font-weight:600}
+  .hero-proof .stars{color:var(--coral);font-weight:800}
+  .hero-stickers{position:relative}
+  .hero-sticker-float{position:absolute;top:-12px;left:-10px;z-index:5}
+
+  .hero-visual{
+    position:relative;border-radius:var(--radius-lg);
+    background:linear-gradient(150deg,var(--teal) 0%,#1f8f7c 55%,var(--blue) 130%);
+    aspect-ratio:1/1.02;box-shadow:var(--shadow);overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-visual .sun{position:absolute;top:8%;right:10%;width:24%;aspect-ratio:1;background:var(--yellow);border-radius:50%;box-shadow:0 0 50px rgba(244,232,130,.7)}
+  .hero-visual .vboard{width:46%;z-index:3;filter:drop-shadow(0 10px 18px rgba(0,0,0,.25));animation:bob 4s ease-in-out infinite}
+  .hero-visual .vshaka{position:absolute;bottom:12%;left:9%;width:22%;z-index:4;transform:rotate(-8deg);animation:bob 3.4s ease-in-out infinite .4s}
+  .hero-wave-svg{position:absolute;bottom:-2px;left:0;width:100%;z-index:2}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(-3deg)}}
+
+  /* ===== Stats ===== */
+  .stats{background:var(--blue);color:#fff;padding:2.2rem 0;margin-top:-1px}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;text-align:center}
+  .stat{display:flex;flex-direction:column;align-items:center;gap:.4rem}
+  .stat img{height:48px;width:auto;margin-bottom:.2rem}
+  .stat .big{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;line-height:1}
+  .stat .lbl{font-weight:500;opacity:.85;font-size:.95rem}
+
+  /* ===== Section heads ===== */
+  .sec{padding:clamp(3.5rem,7vw,6rem) 0}
+  .sec-head{text-align:center;max-width:42ch;margin:0 auto 3rem}
+  .sec-head .eyebrow{font-family:'Caveat',cursive;font-weight:700;color:var(--teal);font-size:1.6rem;display:block}
+  .sec-head p{font-weight:500;margin-top:.6rem;color:#3a517e}
+
+  /* ===== Traject ===== */
+  #traject{background:linear-gradient(180deg,var(--cream),#fff)}
+  .journey{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;position:relative}
+  .phase{
+    background:#fff;border-radius:var(--radius);padding:1.8rem 1.4rem;
+    box-shadow:var(--shadow-sm);border:2px solid var(--blue-soft);
+    position:relative;transition:transform .25s ease,box-shadow .25s ease;
+    display:flex;flex-direction:column;
+  }
+  .phase:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .phase .num{
+    position:absolute;top:-22px;left:1.4rem;
+    width:46px;height:46px;border-radius:50%;
+    display:grid;place-items:center;font-weight:800;color:#fff;font-size:1.2rem;
+    box-shadow:var(--shadow-sm);
+  }
+  .phase:nth-child(1) .num{background:var(--coral)}
+  .phase:nth-child(2) .num{background:var(--teal)}
+  .phase:nth-child(3) .num{background:var(--blue)}
+  .phase:nth-child(4) .num{background:#e0a82e}
+  .phase img.ic{height:58px;width:auto;margin:.6rem 0 1rem}
+  .phase h3{font-size:1.2rem;margin-bottom:.5rem}
+  .phase p{font-weight:500;font-size:.97rem;color:#3a517e}
+  .phase .reward{margin-top:auto;padding-top:1rem;font-family:'Caveat',cursive;font-size:1.25rem;color:var(--coral);font-weight:700}
+
+  /* ===== Verhalen ===== */
+  #verhalen{background:var(--teal);color:#fff}
+  #verhalen .sec-head .eyebrow{color:var(--yellow)}
+  #verhalen .sec-head p{color:rgba(255,255,255,.9)}
+  .stories{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem}
+  .story{
+    background:#fff;color:var(--blue);border-radius:24px;padding:1.8rem;
+    position:relative;box-shadow:var(--shadow);transition:transform .25s ease;
+  }
+  .story:nth-child(odd){transform:rotate(-1.2deg)}
+  .story:nth-child(even){transform:rotate(1.2deg)}
+  .story:hover{transform:translateY(-6px) rotate(0)}
+  .story::after{
+    content:"";position:absolute;bottom:-16px;left:34px;
+    border-width:18px 18px 0 0;border-style:solid;border-color:#fff transparent transparent transparent;
+    filter:drop-shadow(0 6px 5px rgba(46,79,142,.12));
+  }
+  .story .q{font-size:1.05rem;font-weight:500;margin-bottom:1.2rem}
+  .story .q::before{content:"“";font-family:'Caveat',cursive;font-size:2.4rem;color:var(--coral);line-height:0;margin-right:.1rem;vertical-align:-.4rem}
+  .story .who{display:flex;align-items:center;gap:.7rem;font-weight:700}
+  .story .who img{height:38px;width:auto}
+  .story .who .age{font-weight:500;color:var(--teal)}
+
+  /* ===== Crew ===== */
+  .crew-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;margin-top:1rem}
+  .crew-card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+  .crew-av{
+    width:120px;height:120px;border-radius:50%;display:grid;place-items:center;
+    box-shadow:var(--shadow-sm);transition:transform .25s ease;
+  }
+  .crew-card:hover .crew-av{transform:translateY(-6px) scale(1.04)}
+  .crew-av img{width:58%}
+  .crew-card .nm{font-weight:700}
+  .crew-card .role{font-weight:500;font-size:.9rem;color:var(--teal)}
+  .crew-line{text-align:center;max-width:48ch;margin:2.4rem auto 0;font-weight:500;font-size:1.1rem}
+  .crew-line strong{color:var(--coral)}
+
+  /* ===== Sponsoren ===== */
+  #sponsoren{background:linear-gradient(180deg,#fff,var(--cream))}
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;align-items:stretch}
+  .tier{
+    background:#fff;border-radius:var(--radius);padding:2rem 1.5rem;
+    border:2px solid var(--blue-soft);box-shadow:var(--shadow-sm);
+    display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .tier:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .tier .tname{font-weight:800;font-size:1.25rem;letter-spacing:.5px}
+  .tier .price{font-size:1.9rem;font-weight:800;margin:.4rem 0 1rem;color:var(--blue)}
+  .tier p{font-weight:500;font-size:.95rem;color:#3a517e;margin-bottom:1.5rem}
+  .tier .btn{margin-top:auto;justify-content:center}
+  .tier .dot{width:36px;height:8px;border-radius:8px;margin-bottom:.8rem}
+  .tier.brons .dot{background:#cd7f4e}
+  .tier.zilver .dot{background:#9fb0bd}
+  .tier.goud .dot{background:#e0a82e}
+  .tier.platinum .dot{background:var(--teal)}
+  .tier.featured{
+    background:linear-gradient(160deg,#2E4F8E,#243f73);color:#fff;
+    border:none;transform:scale(1.04);
+  }
+  .tier.featured:hover{transform:scale(1.04) translateY(-8px)}
+  .tier.featured .price,.tier.featured p{color:#fff}
+  .tier.featured p{opacity:.92}
+  .tier .badge{
+    align-self:flex-start;font-family:'Caveat',cursive;font-weight:700;
+    background:var(--yellow);color:var(--blue);padding:.1rem .8rem;border-radius:10px;
+    transform:rotate(-3deg);margin-bottom:.8rem;font-size:1.2rem;
+  }
+
+  /* ===== Doe mee / form ===== */
+  #doemee{background:var(--coral);color:#fff;overflow:hidden}
+  #doemee .sec-head .eyebrow{color:var(--yellow)}
+  #doemee .sec-head p{color:rgba(255,255,255,.92)}
+  .form-card{
+    background:var(--cream);color:var(--blue);
+    max-width:680px;margin:0 auto;border-radius:var(--radius-lg);
+    padding:clamp(1.8rem,4vw,3rem);box-shadow:var(--shadow);position:relative;
+  }
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+  .field{display:flex;flex-direction:column;gap:.35rem}
+  .field.full{grid-column:1/-1}
+  .field label{font-weight:600;font-size:.92rem}
+  .field input,.field select{
+    font-family:inherit;font-size:1rem;padding:.8rem 1rem;
+    border:2px solid var(--blue-soft);border-radius:14px;background:#fff;color:var(--blue);
+    transition:border-color .2s ease,box-shadow .2s ease;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 4px rgba(47,174,151,.18)}
+  .iam{display:flex;gap:.6rem;flex-wrap:wrap}
+  .iam label{
+    flex:1;min-width:120px;cursor:pointer;text-align:center;
+    border:2px solid var(--blue-soft);border-radius:14px;padding:.7rem;font-weight:600;
+    background:#fff;transition:.2s;
+  }
+  .iam input{position:absolute;opacity:0;pointer-events:none}
+  .iam label:hover{border-color:var(--teal)}
+  .iam input:checked + span{}
+  .iam label.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .form-card .btn{width:100%;justify-content:center;margin-top:.4rem;font-size:1.15rem;padding:1.1rem}
+  .thanks{
+    display:none;text-align:center;padding:2rem 1rem;
+  }
+  .thanks.show{display:block;animation:pop .5s ease}
+  .thanks h3{font-size:1.8rem;color:var(--coral)}
+  .thanks p{font-weight:500;margin-top:.6rem}
+  .thanks img{height:80px;margin:0 auto 1rem}
+  @keyframes pop{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+
+  /* ===== Footer ===== */
+  footer{background:var(--blue);color:#fff;padding:3rem 0 1.6rem}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:2rem;align-items:start}
+  footer .logo img{height:50px;margin-bottom:1rem}
+  footer .mission{font-weight:500;max-width:42ch;opacity:.92}
+  footer .anbi{margin-top:1rem;font-size:.9rem;opacity:.8}
+  .socials{display:flex;gap:.8rem;margin-top:.4rem}
+  .socials a{
+    width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);
+    display:grid;place-items:center;transition:.2s;
+  }
+  .socials a:hover{background:var(--coral);transform:translateY(-3px)}
+  .socials a img{height:24px}
+  footer h4{margin-bottom:.8rem}
+  footer .foot-links a{display:block;padding:.25rem 0;opacity:.85;font-weight:500}
+  footer .foot-links a:hover{opacity:1;color:var(--yellow)}
+  .copy{text-align:center;margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.18);font-size:.9rem;opacity:.8}
+
+  /* ===== Reveal ===== */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ===== Responsive ===== */
+  @media(max-width:900px){
+    .nav-toggle{display:block}
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;align-items:stretch;gap:0;
+      background:var(--cream);border-bottom:2px solid var(--blue-soft);
+      max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 6vw;
+    }
+    .nav-links.open{max-height:420px;padding:1rem 6vw 1.4rem}
+    .nav-links a.link{padding:.8rem 0;border-bottom:1px solid var(--blue-soft)}
+    .nav-links .btn{margin-top:.8rem;justify-content:center}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-visual{max-width:440px;margin:0 auto}
+    .stats-grid{grid-template-columns:repeat(2,1fr);gap:2rem}
+    .journey{grid-template-columns:repeat(2,1fr);gap:2rem 1.4rem}
+    .stories{grid-template-columns:1fr;max-width:480px;margin-inline:auto}
+    .crew-grid{grid-template-columns:repeat(2,1fr)}
+    .tiers{grid-template-columns:repeat(2,1fr)}
+    .tier.featured{transform:none}
+    .tier.featured:hover{transform:translateY(-8px)}
+    .foot-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:480px){
+    .stats-grid{grid-template-columns:1fr}
+    .journey{grid-template-columns:1fr}
+    .crew-grid{grid-template-columns:repeat(2,1fr)}
+    .tiers{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    .hero-cta{flex-direction:column;align-items:stretch}
+    .hero-cta .btn{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="nav-logo" aria-label="Ride the Wave home">
+      <img src="assets/logo.png" alt="Ride the Wave logo">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu openen" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" aria-label="Hoofdmenu">
+      <a class="link" href="#traject">Het traject</a>
+      <a class="link" href="#verhalen">Verhalen</a>
+      <a class="link" href="#crew">Crew</a>
+      <a class="link" href="#sponsoren">Sponsoren</a>
+      <a class="btn btn-coral" href="#doemee">Doe mee</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="sunburst" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <div class="hero-stickers">
+        <span class="sticker">BEGIN GEWOON!</span>
+      </div>
+      <h1 style="margin-top:1.2rem">Pak jouw <span class="hl">eerste golf.</span></h1>
+      <p class="sub">Surfen leren? Kosteloos, met een leuke crew. Spring erin.</p>
+      <div class="hero-cta">
+        <a href="#doemee" class="btn btn-coral">Doe mee</a>
+        <a href="#verhalen" class="btn btn-ghost">Bekijk verhalen →</a>
+      </div>
+      <div class="hero-proof">
+        <span class="stars">4,9 ★</span>
+        <span>· 200+ jongeren gingen je voor</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="hero-visual">
+        <div class="sun" aria-hidden="true"></div>
+        <img class="vboard" src="assets/surfboard-coral.png" alt="" aria-hidden="true">
+        <img class="vshaka" src="assets/shaka-yellow.png" alt="" aria-hidden="true">
+        <svg class="hero-wave-svg" viewBox="0 0 500 90" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,55 C80,20 150,80 250,50 C350,20 420,75 500,45 L500,90 L0,90 Z" fill="#FBF7EC" opacity=".95"/>
+          <path d="M0,68 C90,40 160,90 260,62 C360,36 430,82 500,58 L500,90 L0,90 Z" fill="#F4E882" opacity=".55"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal"><img src="assets/pin-yellow.png" alt=""><span class="big">3 locaties</span><span class="lbl">Scheveningen · Noordwijk · Ouddorp</span></div>
+    <div class="stat reveal"><img src="assets/people-yellow.png" alt=""><span class="big">14–23 jaar</span><span class="lbl">Voor jou gemaakt</span></div>
+    <div class="stat reveal"><img src="assets/star-yellow.png" alt=""><span class="big">€0 kosteloos</span><span class="lbl">Echt waar, gratis</span></div>
+    <div class="stat reveal"><img src="assets/heart-yellow.png" alt=""><span class="big">ANBI</span><span class="lbl">Elke gift gaat naar jongeren</span></div>
+  </div>
+</section>
+
+<!-- ===== TRAJECT ===== -->
+<section class="sec" id="traject">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">jouw reis op de golven</span>
+      <h2>Het traject</h2>
+      <p>Van je allereerste les tot instructeur. Vier fasen, één golf — en jij rijdt 'm helemaal uit.</p>
+    </div>
+    <div class="journey">
+      <article class="phase reveal">
+        <span class="num">1</span>
+        <img class="ic" src="assets/surfboard-coral.png" alt="Surfboard icoon">
+        <h3>Welcome Beachbum</h3>
+        <p>10x surfles. Je leert de basis, valt om, staat weer op — en lacht erbij.</p>
+        <span class="reward">+ je eigen wetsuit!</span>
+      </article>
+      <article class="phase reveal">
+        <span class="num">2</span>
+        <img class="ic" src="assets/wave-teal.png" alt="Golf icoon">
+        <h3>Join the Surf</h3>
+        <p>10x board te leen. Je pakt steeds vakere golven en wordt deel van de crew.</p>
+        <span class="reward">+ je eigen board!</span>
+      </article>
+      <article class="phase reveal">
+        <span class="num">3</span>
+        <img class="ic" src="assets/swallow-blue.png" alt="Zwaluw icoon">
+        <h3>Ride the Wave</h3>
+        <p>Een jaar lang begeleid surfen met je eigen board &amp; wetsuit. Jij draagt de zee nu in je.</p>
+        <span class="reward">+ je certificaat!</span>
+      </article>
+      <article class="phase reveal">
+        <span class="num">4</span>
+        <img class="ic" src="assets/lightning-yellow.png" alt="Bliksem icoon">
+        <h3>Play it Forward</h3>
+        <p>Opleiding tot surfinstructeur. Plus hulp bij het vinden van een baan. Jij geeft het door.</p>
+        <span class="reward">+ jouw toekomst!</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VERHALEN ===== -->
+<section class="sec" id="verhalen">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">recht uit het water</span>
+      <h2>Verhalen van de crew</h2>
+      <p>Geen praatjes — gewoon jongeren die hun golf pakten.</p>
+    </div>
+    <div class="stories">
+      <article class="story reveal">
+        <p class="q">Ik dacht dat surfen niks voor mij was. Eerste les al verkeerd: ik kon niet meer stoppen met grijnzen. De crew voelt nu als familie.</p>
+        <div class="who"><img src="assets/shaka-coral.png" alt=""><span>Sem <span class="age">· 16</span></span></div>
+      </article>
+      <article class="story reveal">
+        <p class="q">Op het water valt alles even weg. Hier maakt niemand je af, je leert gewoon samen. En het kostte me nul euro — echt bizar.</p>
+        <div class="who"><img src="assets/hibiscus-teal.png" alt=""><span>Noa <span class="age">· 19</span></span></div>
+      </article>
+      <article class="story reveal">
+        <p class="q">Begon als beachbum, sta nu zelf les te geven aan nieuwe gasten. Ride the Wave gaf me een richting waar ik niet op had gerekend.</p>
+        <div class="who"><img src="assets/star-coral.png" alt=""><span>Tijn <span class="age">· 22</span></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CREW ===== -->
+<section class="sec" id="crew">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">jouw rolmodellen</span>
+      <h2>Meet the crew</h2>
+      <p>Onze instructeurs begonnen zelf ooit als deelnemer. Zij weten precies hoe jouw eerste golf voelt.</p>
+    </div>
+    <div class="crew-grid">
+      <div class="crew-card reveal">
+        <div class="crew-av" style="background:var(--teal)"><img src="assets/people-yellow.png" alt="Crewlid Fenna"></div>
+        <span class="nm">Fenna</span><span class="role">Head Coach · Scheveningen</span>
+      </div>
+      <div class="crew-card reveal">
+        <div class="crew-av" style="background:var(--coral)"><img src="assets/shaka-yellow.png" alt="Crewlid Luuk"></div>
+        <span class="nm">Luuk</span><span class="role">Instructeur · Noordwijk</span>
+      </div>
+      <div class="crew-card reveal">
+        <div class="crew-av" style="background:var(--blue)"><img src="assets/people-yellow.png" alt="Crewlid Yara"></div>
+        <span class="nm">Yara</span><span class="role">Instructeur · Ouddorp</span>
+      </div>
+      <div class="crew-card reveal">
+        <div class="crew-av" style="background:#e0a82e"><img src="assets/swallow-teal.png" alt="Crewlid Dani"></div>
+        <span class="nm">Dani</span><span class="role">Buddy · Costa Rica '26</span>
+      </div>
+    </div>
+    <p class="crew-line reveal">Bij ons groei je door: van <strong>deelnemer</strong> naar <strong>crew</strong> naar <strong>instructeur</strong>. Jij kan dit.</p>
+  </div>
+</section>
+
+<!-- ===== SPONSOREN ===== -->
+<section class="sec" id="sponsoren">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">word partner</span>
+      <h2>Sponsorpakketten</h2>
+      <p>Jij geeft jongeren de zee. Wij zorgen dat elke euro op het strand belandt — ANBI gegarandeerd.</p>
+    </div>
+    <div class="tiers">
+      <article class="tier brons reveal">
+        <span class="dot"></span>
+        <span class="tname">BRONS</span>
+        <span class="price">€3.750</span>
+        <p>Geef 5 jongeren een kans op een nieuwe start.</p>
+        <a href="#doemee" class="btn btn-ghost">Word partner</a>
+      </article>
+      <article class="tier zilver reveal">
+        <span class="dot"></span>
+        <span class="tname">ZILVER</span>
+        <span class="price">€7.500</span>
+        <p>Geef 5 jongeren een kans én een jaar lang de tijd om te oefenen.</p>
+        <a href="#doemee" class="btn btn-ghost">Word partner</a>
+      </article>
+      <article class="tier goud featured reveal">
+        <span class="badge">populair!</span>
+        <span class="dot"></span>
+        <span class="tname">GOUD</span>
+        <span class="price">€15.000</span>
+        <p>Geef 5 jongeren een kans, de tijd om te oefenen én een surf home voor het jaar daarna.</p>
+        <a href="#doemee" class="btn btn-coral">Word partner</a>
+      </article>
+      <article class="tier platinum reveal">
+        <span class="dot"></span>
+        <span class="tname">PLATINUM</span>
+        <span class="price">€25.000</span>
+        <p>Geef 5 jongeren een kans, oefening, een surf home én train ze om de kennis door te geven.</p>
+        <a href="#doemee" class="btn btn-ghost">Word partner</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOE MEE ===== -->
+<section class="sec" id="doemee">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">pak je golf</span>
+      <h2>Doe mee</h2>
+      <p>Jongere, ouder of sponsor — laat van je horen en we nemen snel contact op.</p>
+    </div>
+    <div class="form-card reveal">
+      <form id="joinForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="naam">Naam</label>
+            <input id="naam" name="naam" type="text" placeholder="Jouw naam" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="jij@mail.nl" required>
+          </div>
+          <div class="field">
+            <label for="leeftijd">Leeftijd</label>
+            <input id="leeftijd" name="leeftijd" type="number" min="1" max="120" placeholder="bv. 16">
+          </div>
+          <div class="field">
+            <label for="locatie">Locatie</label>
+            <select id="locatie" name="locatie" required>
+              <option value="" disabled selected>Kies een spot…</option>
+              <option>Scheveningen</option>
+              <option>Noordwijk</option>
+              <option>Ouddorp</option>
+              <option>Costa Rica (nieuw, winter 2026)</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label>Ik ben…</label>
+            <div class="iam" id="iamGroup">
+              <label class="sel"><input type="radio" name="rol" value="Jongere" checked><span>Jongere</span></label>
+              <label><input type="radio" name="rol" value="Ouder"><span>Ouder</span></label>
+              <label><input type="radio" name="rol" value="Sponsor"><span>Sponsor</span></label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-coral">Verstuur 🤙</button>
+      </form>
+      <div class="thanks" id="thanks" role="status" aria-live="polite">
+        <img src="assets/shaka-coral.png" alt="">
+        <h3>Te gek!</h3>
+        <p>We nemen snel contact op 🌊</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="logo"><img src="assets/logo.png" alt="Ride the Wave logo"></div>
+      <p class="mission">We geven jongeren van 14 tot 23 de kracht van de zee — kosteloos, begeleid en samen. Pak je golf.</p>
+      <p class="anbi">Ride the Wave is een ANBI-erkende stichting. Elke gift gaat naar jongeren.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><img src="assets/hibiscus-yellow.png" alt=""></a>
+        <a href="#" aria-label="TikTok"><img src="assets/lightning-yellow.png" alt=""></a>
+        <a href="#" aria-label="YouTube"><img src="assets/wave-yellow.png" alt=""></a>
+      </div>
+    </div>
+    <div>
+      <h4>Navigeer</h4>
+      <nav class="foot-links" aria-label="Footer navigatie">
+        <a href="#traject">Het traject</a>
+        <a href="#verhalen">Verhalen</a>
+        <a href="#crew">Crew</a>
+        <a href="#sponsoren">Sponsoren</a>
+        <a href="#doemee">Doe mee</a>
+      </nav>
+    </div>
+  </div>
+  <div class="wrap copy">© 2026 Ride the Wave · Scheveningen · Noordwijk · Ouddorp · Costa Rica</div>
+</footer>
+
+<script>
+  // ===== Mobile nav toggle =====
+  (function(){
+    var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('open');
+      t.classList.toggle('open',open);
+      t.setAttribute('aria-expanded',open);
+    });
+    l.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){
+        l.classList.remove('open');t.classList.remove('open');t.setAttribute('aria-expanded',false);
+      });
+    });
+  })();
+
+  // ===== Scroll reveal =====
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      });
+    },{threshold:.14});
+    els.forEach(function(e){io.observe(e);});
+  })();
+
+  // ===== "Ik ben…" radio styling =====
+  (function(){
+    var grp=document.getElementById('iamGroup');
+    grp.addEventListener('change',function(){
+      grp.querySelectorAll('label').forEach(function(lab){
+        lab.classList.toggle('sel',lab.querySelector('input').checked);
+      });
+    });
+  })();
+
+  // ===== Form submit =====
+  (function(){
+    var form=document.getElementById('joinForm'),thanks=document.getElementById('thanks');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      form.style.display='none';
+      thanks.classList.add('show');
+      thanks.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  })();
+</script>
+</body>
+</html>
