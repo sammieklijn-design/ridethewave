@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ride the Wave — Find Your Flow</title>
+<meta name="description" content="Ride the Wave: van eerste golf tot internationaal instructeur. Een kosteloos surftraject voor jongeren van 14 tot 23 jaar. Pak je flow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --diepzee:#234E52;
+    --diepzee-dark:#1A3A3D;
+    --amber:#E8A23C;
+    --amber-dark:#D08E2A;
+    --zand:#E7D6B8;
+    --creme:#FAF3E7;
+    --white:#FFFFFF;
+    --ink:#1A2B2D;
+    --shadow-sm:0 4px 14px rgba(35,78,82,.10);
+    --shadow-md:0 12px 34px rgba(35,78,82,.16);
+    --shadow-lg:0 26px 60px rgba(35,78,82,.22);
+    --radius:18px;
+    --radius-lg:28px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--diepzee);
+    background:var(--creme);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.5px;line-height:.98;text-transform:uppercase;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .amber{color:var(--amber);}
+  .eyebrow{
+    font-family:'Inter';font-weight:700;text-transform:uppercase;
+    letter-spacing:.28em;font-size:.72rem;color:var(--amber);
+    display:inline-block;margin-bottom:18px;
+  }
+  .eyebrow.light{color:var(--amber);}
+  .lead{font-size:clamp(1.02rem,1.8vw,1.18rem);line-height:1.7;max-width:60ch;}
+
+  /* ===== BUTTONS ===== */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    font-family:'Inter';font-weight:700;font-size:1rem;
+    padding:15px 30px;border-radius:999px;cursor:pointer;border:none;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    text-transform:uppercase;letter-spacing:.04em;
+  }
+  .btn-amber{background:var(--amber);color:var(--diepzee-dark);box-shadow:0 10px 26px rgba(232,162,60,.4);}
+  .btn-amber:hover{background:var(--amber-dark);transform:translateY(-3px);box-shadow:0 16px 34px rgba(232,162,60,.5);}
+  .btn-ghost{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.7);}
+  .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;transform:translateY(-3px);}
+  .btn-line{background:transparent;color:var(--diepzee);border:2px solid var(--diepzee);}
+  .btn-line:hover{background:var(--diepzee);color:var(--creme);transform:translateY(-3px);}
+
+  /* ===== NAV ===== */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+    padding:18px 0;
+  }
+  header.nav.scrolled{
+    background:rgba(26,58,61,.92);
+    backdrop-filter:blur(12px);
+    box-shadow:0 6px 24px rgba(0,0,0,.18);
+    padding:11px 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+  .logo{display:flex;align-items:center;gap:11px;}
+  .logo img{height:42px;width:auto;}
+  .logo .word{font-family:'Anton';font-size:1.42rem;color:var(--creme);letter-spacing:1px;line-height:1;}
+  .nav-links{display:flex;align-items:center;gap:30px;}
+  .nav-links a{
+    font-weight:600;font-size:.95rem;color:var(--creme);
+    position:relative;padding:4px 0;transition:color .2s;
+  }
+  .nav-links a:not(.btn)::after{
+    content:'';position:absolute;left:0;bottom:-2px;height:2px;width:0;
+    background:var(--amber);transition:width .25s ease;
+  }
+  .nav-links a:not(.btn):hover::after{width:100%;}
+  .nav-links a:not(.btn):hover{color:#fff;}
+  .nav-links .btn{padding:10px 22px;font-size:.85rem;color:var(--diepzee-dark);}
+  .hamburger{
+    display:none;background:none;border:none;cursor:pointer;
+    width:42px;height:42px;flex-direction:column;justify-content:center;gap:6px;padding:8px;
+  }
+  .hamburger span{display:block;height:2.5px;width:100%;background:var(--creme);border-radius:2px;transition:.3s;}
+  .hamburger.open span:nth-child(1){transform:translateY(8.5px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-8.5px) rotate(-45deg);}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    color:var(--creme);overflow:hidden;padding:120px 0 70px;
+  }
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%;}
+  .hero-bg::after{
+    content:'';position:absolute;inset:0;
+    background:
+      linear-gradient(100deg, rgba(26,58,61,.92) 0%, rgba(35,78,82,.74) 42%, rgba(35,78,82,.30) 100%),
+      linear-gradient(0deg, rgba(26,58,61,.85) 0%, rgba(26,58,61,0) 45%);
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:'Anton';letter-spacing:2px;font-size:.95rem;
+    background:var(--amber);color:var(--diepzee-dark);
+    padding:8px 18px;border-radius:999px;margin-bottom:24px;
+  }
+  .hero h1{
+    font-size:clamp(3.2rem,9vw,7.4rem);
+    text-shadow:0 4px 30px rgba(0,0,0,.3);max-width:14ch;
+  }
+  .hero h1 .amber{color:var(--amber);}
+  .hero p.sub{
+    font-size:clamp(1.1rem,2.3vw,1.5rem);font-weight:400;
+    margin:22px 0 34px;max-width:46ch;color:rgba(250,243,231,.94);
+  }
+  .hero p.sub strong{font-weight:700;color:#fff;}
+  .hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+  .social-proof{
+    display:flex;align-items:center;gap:14px;margin-top:38px;
+    font-size:.95rem;color:rgba(250,243,231,.9);flex-wrap:wrap;
+  }
+  .stars{color:var(--amber);letter-spacing:2px;font-size:1.1rem;}
+  .social-proof .divider{width:1px;height:20px;background:rgba(250,243,231,.4);}
+  .scroll-cue{
+    position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;
+    color:rgba(250,243,231,.8);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .scroll-cue .mouse{width:24px;height:38px;border:2px solid rgba(250,243,231,.6);border-radius:14px;position:relative;}
+  .scroll-cue .mouse::after{
+    content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);
+    width:4px;height:7px;background:var(--amber);border-radius:2px;animation:scrolldot 1.6s infinite;
+  }
+  @keyframes scrolldot{0%{opacity:0;top:7px;}40%{opacity:1;}80%{opacity:0;top:18px;}100%{opacity:0;}}
+
+  /* ===== STATS BAR ===== */
+  .stats{background:var(--diepzee);color:var(--creme);padding:34px 0;}
+  .stats-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;text-align:center;}
+  .stat{flex:1;min-width:150px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .stat .num{font-family:'Anton';font-size:clamp(1.8rem,4vw,2.6rem);color:var(--amber);line-height:1;}
+  .stat .lbl{font-size:.85rem;letter-spacing:.05em;color:rgba(250,243,231,.85);text-transform:uppercase;font-weight:600;}
+  .stat-sep{width:1px;background:rgba(250,243,231,.18);align-self:stretch;}
+
+  /* ===== SECTION GENERIC ===== */
+  section{position:relative;}
+  .sec{padding:clamp(70px,9vw,120px) 0;}
+  .sec-head{max-width:60ch;margin-bottom:54px;}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .sec-head h2{font-size:clamp(2.2rem,5.4vw,4rem);}
+  .sec-head p{margin-top:18px;}
+  .sec.cream{background:var(--creme);}
+  .sec.sand{background:var(--zand);}
+  .sec.white{background:var(--white);}
+  .sec.deep{background:var(--diepzee);color:var(--creme);}
+  .sec.deep .sec-head h2{color:var(--creme);}
+  .sec.deep .lead{color:rgba(250,243,231,.9);}
+
+  /* ===== TRAJECT ===== */
+  .traject-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .phase{
+    position:relative;background:var(--white);border-radius:var(--radius);overflow:hidden;
+    box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .phase:hover{transform:translateY(-8px);box-shadow:var(--shadow-md);}
+  .phase-img{position:relative;height:180px;overflow:hidden;}
+  .phase-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+  .phase:hover .phase-img img{transform:scale(1.07);}
+  .phase-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(35,78,82,.05),rgba(35,78,82,.45));}
+  .phase-num{
+    position:absolute;top:14px;left:14px;z-index:2;
+    font-family:'Anton';font-size:1.05rem;
+    background:var(--amber);color:var(--diepzee-dark);
+    width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 14px rgba(0,0,0,.2);
+  }
+  .phase-body{padding:24px 22px 28px;flex:1;display:flex;flex-direction:column;}
+  .phase-body h3{font-size:1.32rem;color:var(--diepzee);margin-bottom:10px;}
+  .phase-body p{font-size:.95rem;color:#3f6064;}
+  .phase-foot{
+    margin-top:auto;padding-top:16px;font-size:.82rem;font-weight:700;
+    color:var(--amber-dark);text-transform:uppercase;letter-spacing:.05em;
+    display:flex;align-items:center;gap:7px;
+  }
+  .traject-line{
+    text-align:center;margin-top:46px;font-family:'Anton';
+    font-size:clamp(1.3rem,3vw,2rem);color:var(--diepzee);letter-spacing:1px;
+  }
+  .traject-line .amber{color:var(--amber);}
+
+  /* ===== VERHALEN ===== */
+  .stories{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px;}
+  .story{
+    background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);
+    display:flex;flex-direction:column;transition:transform .3s, box-shadow .3s;
+  }
+  .story:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);}
+  .story-img{height:230px;overflow:hidden;position:relative;}
+  .story-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+  .story:hover .story-img img{transform:scale(1.06);}
+  .story-body{padding:26px 24px 28px;display:flex;flex-direction:column;flex:1;}
+  .quote-mark{font-family:'Anton';font-size:3rem;color:var(--amber);line-height:.6;margin-bottom:8px;}
+  .story-body p.q{font-size:1.05rem;color:var(--diepzee);font-weight:600;line-height:1.55;flex:1;}
+  .story-name{margin-top:20px;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--diepzee);}
+  .story-name .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);}
+  .story-name span.role{font-weight:400;color:#6a8589;font-size:.9rem;}
+  .pullquote{
+    position:relative;border-radius:var(--radius-lg);overflow:hidden;
+    min-height:340px;display:flex;align-items:center;box-shadow:var(--shadow-md);
+  }
+  .pullquote img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .pullquote::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(26,58,61,.92),rgba(35,78,82,.55));}
+  .pullquote .pq-inner{position:relative;z-index:2;padding:clamp(34px,6vw,72px);max-width:760px;}
+  .pullquote blockquote{font-family:'Anton';font-size:clamp(1.6rem,4vw,3rem);color:var(--creme);line-height:1.04;text-transform:uppercase;}
+  .pullquote blockquote .amber{color:var(--amber);}
+  .pullquote cite{display:block;margin-top:22px;font-style:normal;font-weight:600;color:rgba(250,243,231,.85);letter-spacing:.05em;}
+
+  /* ===== CREW ===== */
+  .crew-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;}
+  .crew-photo{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);min-height:420px;}
+  .crew-photo img{width:100%;height:100%;object-fit:cover;}
+  .crew-photo .badge{
+    position:absolute;bottom:18px;left:18px;z-index:2;
+    background:var(--amber);color:var(--diepzee-dark);font-family:'Anton';
+    padding:9px 18px;border-radius:999px;font-size:.95rem;letter-spacing:1px;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+  }
+  .crew-flow{display:flex;align-items:center;gap:10px;margin:24px 0 26px;flex-wrap:wrap;}
+  .crew-flow .step{
+    font-family:'Anton';font-size:1rem;letter-spacing:.5px;color:var(--diepzee);
+    background:var(--zand);padding:9px 16px;border-radius:999px;
+  }
+  .crew-flow .step.hot{background:var(--amber);color:var(--diepzee-dark);}
+  .crew-flow .arrow{color:var(--amber);font-weight:700;font-size:1.2rem;}
+  .crew-names{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;}
+  .crew-names .chip{
+    display:flex;align-items:center;gap:9px;background:var(--white);
+    border:1px solid rgba(35,78,82,.12);border-radius:999px;padding:8px 16px 8px 9px;
+    font-weight:600;font-size:.92rem;box-shadow:var(--shadow-sm);
+  }
+  .crew-names .av{
+    width:30px;height:30px;border-radius:50%;background:var(--diepzee);color:var(--creme);
+    display:flex;align-items:center;justify-content:center;font-family:'Anton';font-size:.8rem;
+  }
+  .crew-names .chip small{display:block;font-weight:400;color:#6a8589;font-size:.76rem;line-height:1;}
+
+  /* ===== SPONSOREN ===== */
+  .sponsor-intro{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-bottom:56px;}
+  .sponsor-intro .photo{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);min-height:300px;position:relative;}
+  .sponsor-intro .photo img{width:100%;height:100%;object-fit:cover;}
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch;}
+  .tier{
+    background:var(--diepzee-dark);border:1px solid rgba(250,243,231,.12);
+    border-radius:var(--radius);padding:30px 24px 32px;display:flex;flex-direction:column;
+    color:var(--creme);position:relative;transition:transform .3s, box-shadow .3s;
+  }
+  .tier:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);}
+  .tier .tname{font-family:'Anton';font-size:1.25rem;letter-spacing:1.5px;color:var(--creme);}
+  .tier .price{font-family:'Anton';font-size:2.1rem;color:var(--amber);margin:10px 0 6px;line-height:1;}
+  .tier .price small{font-family:'Inter';font-weight:400;font-size:.8rem;color:rgba(250,243,231,.6);display:block;margin-top:4px;letter-spacing:0;}
+  .tier p{font-size:.92rem;color:rgba(250,243,231,.82);margin-top:14px;flex:1;}
+  .tier .tline{height:3px;width:44px;background:rgba(250,243,231,.25);border-radius:2px;margin-top:16px;}
+  .tier.feature{
+    background:linear-gradient(165deg,var(--amber),var(--amber-dark));
+    color:var(--diepzee-dark);transform:scale(1.04);box-shadow:var(--shadow-lg);
+  }
+  .tier.feature:hover{transform:scale(1.04) translateY(-8px);}
+  .tier.feature .tname,.tier.feature .price{color:var(--diepzee-dark);}
+  .tier.feature .price small{color:rgba(26,43,45,.65);}
+  .tier.feature p{color:rgba(26,43,45,.85);}
+  .tier.feature .tline{background:rgba(26,43,45,.3);}
+  .tier .ribbon{
+    position:absolute;top:-13px;right:18px;background:var(--diepzee-dark);color:var(--amber);
+    font-family:'Inter';font-weight:700;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+    padding:6px 14px;border-radius:999px;
+  }
+  .anbi-note{
+    margin-top:40px;text-align:center;font-size:.92rem;color:rgba(250,243,231,.78);
+    display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+  }
+  .anbi-note .pill{background:rgba(250,243,231,.12);border:1px solid rgba(250,243,231,.2);padding:5px 14px;border-radius:999px;font-weight:600;color:var(--creme);}
+
+  /* ===== DOE MEE FORM ===== */
+  .signup{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;align-items:center;}
+  .signup-copy h2{font-size:clamp(2.2rem,5vw,3.6rem);color:var(--diepzee);}
+  .signup-copy .lead{margin-top:18px;}
+  .signup-perks{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:12px;}
+  .signup-perks li{display:flex;align-items:center;gap:12px;font-weight:600;color:var(--diepzee);}
+  .signup-perks .tick{
+    flex:none;width:26px;height:26px;border-radius:50%;background:var(--amber);color:var(--diepzee-dark);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;
+  }
+  form.card{
+    background:var(--white);border-radius:var(--radius-lg);padding:clamp(28px,4vw,42px);
+    box-shadow:var(--shadow-lg);
+  }
+  form.card h3{font-size:1.5rem;color:var(--diepzee);margin-bottom:6px;}
+  form.card .formsub{font-size:.92rem;color:#6a8589;margin-bottom:24px;font-family:'Inter';text-transform:none;letter-spacing:0;font-weight:400;line-height:1.5;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-weight:600;font-size:.85rem;margin-bottom:7px;color:var(--diepzee);}
+  .field input,.field select{
+    width:100%;padding:13px 15px;border:1.5px solid #d9d0bf;border-radius:12px;
+    font-family:'Inter';font-size:1rem;color:var(--ink);background:var(--creme);transition:border .2s, box-shadow .2s;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 4px rgba(232,162,60,.18);background:#fff;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .role-group{display:flex;gap:10px;}
+  .role-group label{
+    flex:1;text-align:center;border:1.5px solid #d9d0bf;border-radius:12px;padding:11px 6px;cursor:pointer;
+    font-weight:600;font-size:.92rem;transition:.2s;background:var(--creme);margin:0;
+  }
+  .role-group input{position:absolute;opacity:0;width:0;height:0;}
+  .role-group label:hover{border-color:var(--amber);}
+  .role-group input:checked + span{}
+  .role-group label.sel{background:var(--amber);border-color:var(--amber);color:var(--diepzee-dark);}
+  form.card .btn{width:100%;margin-top:8px;}
+  .form-success{
+    display:none;text-align:center;padding:30px 10px;
+  }
+  .form-success.show{display:block;animation:pop .4s ease;}
+  @keyframes pop{from{opacity:0;transform:scale(.94);}to{opacity:1;transform:scale(1);}}
+  .form-success .ico{font-size:2.6rem;margin-bottom:10px;}
+  .form-success h3{font-size:1.7rem;color:var(--diepzee);margin-bottom:10px;}
+  .form-success p{color:#5a777b;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--diepzee-dark);color:var(--creme);padding:64px 0 30px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:44px;}
+  .foot-logo{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .foot-logo img{height:48px;}
+  .foot-logo .word{font-family:'Anton';font-size:1.6rem;color:var(--creme);letter-spacing:1px;}
+  .foot-brand p{color:rgba(250,243,231,.78);max-width:38ch;font-size:.95rem;}
+  .foot-col h4{font-size:1rem;color:var(--amber);margin-bottom:16px;letter-spacing:1px;}
+  .foot-col a{display:block;color:rgba(250,243,231,.8);margin-bottom:10px;font-size:.93rem;transition:color .2s;}
+  .foot-col a:hover{color:var(--amber);}
+  .socials{display:flex;gap:12px;margin-top:6px;}
+  .socials a{
+    width:40px;height:40px;border-radius:50%;background:rgba(250,243,231,.1);
+    display:flex;align-items:center;justify-content:center;transition:.2s;border:1px solid rgba(250,243,231,.15);
+  }
+  .socials a:hover{background:var(--amber);transform:translateY(-3px);}
+  .socials svg{width:18px;height:18px;fill:var(--creme);}
+  .socials a:hover svg{fill:var(--diepzee-dark);}
+  .foot-bottom{
+    border-top:1px solid rgba(250,243,231,.14);padding-top:22px;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    font-size:.85rem;color:rgba(250,243,231,.6);
+  }
+  .foot-bottom .anbi{display:flex;align-items:center;gap:8px;}
+  .foot-bottom .pill{background:rgba(232,162,60,.18);color:var(--amber);padding:4px 12px;border-radius:999px;font-weight:700;}
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.08s;}
+  .reveal.d2{transition-delay:.16s;}
+  .reveal.d3{transition-delay:.24s;}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:980px){
+    .traject-grid{grid-template-columns:repeat(2,1fr);}
+    .tiers{grid-template-columns:repeat(2,1fr);}
+    .tier.feature{transform:none;}
+    .tier.feature:hover{transform:translateY(-8px);}
+    .stories{grid-template-columns:1fr;}
+    .crew-grid,.sponsor-intro,.signup{grid-template-columns:1fr;gap:34px;}
+    .crew-photo{min-height:320px;}
+  }
+  @media(max-width:760px){
+    .nav-links{
+      position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);
+      background:var(--diepzee-dark);flex-direction:column;align-items:flex-start;
+      justify-content:center;gap:26px;padding:40px;transform:translateX(105%);
+      transition:transform .35s ease;box-shadow:-20px 0 50px rgba(0,0,0,.3);
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a{font-size:1.15rem;}
+    .nav-links .btn{font-size:1rem;padding:13px 26px;}
+    .hamburger{display:flex;z-index:120;}
+    header.nav:not(.scrolled){background:rgba(26,58,61,.55);backdrop-filter:blur(6px);}
+    .stat-sep{display:none;}
+    .stats-grid{gap:18px 30px;}
+    .stat{min-width:42%;}
+  }
+  @media(max-width:480px){
+    .traject-grid{grid-template-columns:1fr;}
+    .tiers{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .role-group{flex-direction:column;}
+    .logo .word{font-size:1.2rem;}
+    .logo img{height:36px;}
+    .hero{min-height:auto;padding:130px 0 80px;}
+    .foot-grid{grid-template-columns:1fr;}
+    .crew-flow{gap:7px;}
+    .crew-flow .step{font-size:.82rem;padding:7px 12px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="Ride the Wave home">
+      <img src="assets/poppetje-creme.png" alt="Ride the Wave surfer logo">
+      <span class="word">RIDE <span class="amber">THE</span> WAVE</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Hoofdnavigatie">
+      <a href="#traject">Het traject</a>
+      <a href="#verhalen">Verhalen</a>
+      <a href="#crew">Crew</a>
+      <a href="#sponsoren">Sponsoren</a>
+      <a href="#doemee" class="btn btn-amber">Doe mee</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu openen" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="assets/photos/hero.jpg" alt="Surfer rijdt door een brekende golf bij zonsondergang">
+  </div>
+  <div class="wrap">
+    <span class="hero-tag">🌊 PAK JE FLOW.</span>
+    <h1>Het water<br>wacht<span class="amber">.</span></h1>
+    <p class="sub">Van eerste golf tot <strong>internationaal instructeur</strong>. Wij geven jongeren een plank, een crew en een toekomst. Stap in.</p>
+    <div class="hero-btns">
+      <a href="#doemee" class="btn btn-amber">Doe mee</a>
+      <a href="#verhalen" class="btn btn-ghost">Bekijk verhalen →</a>
+    </div>
+    <div class="social-proof">
+      <span class="stars">★★★★★</span>
+      <strong>4,9</strong>
+      <span class="divider"></span>
+      <span>200+ jongeren gingen je voor</span>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">
+    <div class="mouse"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat reveal">
+      <span class="num">3</span>
+      <span class="lbl">Locaties · Scheveningen · Noordwijk · Ouddorp</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat reveal d1">
+      <span class="num">14–23</span>
+      <span class="lbl">Jaar · Voor elke jongere</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat reveal d2">
+      <span class="num">€0</span>
+      <span class="lbl">Volledig kosteloos</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat reveal d3">
+      <span class="num">ANBI</span>
+      <span class="lbl">Erkend goed doel</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TRAJECT ============ -->
+<section class="sec cream" id="traject">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Het traject</span>
+      <h2>Vier fasen.<br>Eén golf naar voren.</h2>
+      <p class="lead" style="margin:18px auto 0;">Je begint met je eerste les en groeit door tot je zelf voor de groep staat. Stap voor stap, golf voor golf — wij blijven naast je staan.</p>
+    </div>
+    <div class="traject-grid">
+      <article class="phase reveal">
+        <div class="phase-img">
+          <span class="phase-num">1</span>
+          <img src="assets/photos/lesson.jpg" alt="Jongere op het strand klaar voor de eerste surfles">
+        </div>
+        <div class="phase-body">
+          <h3>Welcome<br>Beachbum</h3>
+          <p>Tien keer surfles met de crew. Je leert het water lezen, opstaan en doorzetten. Daarna is je eigen wetsuit van jou.</p>
+          <span class="phase-foot">↳ Je eigen wetsuit</span>
+        </div>
+      </article>
+      <article class="phase reveal d1">
+        <div class="phase-img">
+          <span class="phase-num">2</span>
+          <img src="assets/photos/surf1.jpg" alt="Surfplank op het strand bij zonsondergang">
+        </div>
+        <div class="phase-body">
+          <h3>Join<br>the Surf</h3>
+          <p>Tien sessies met een board te leen. Je pakt steeds grotere golven en wordt onderdeel van de crew. Daarna is je eigen board van jou.</p>
+          <span class="phase-foot">↳ Je eigen board</span>
+        </div>
+      </article>
+      <article class="phase reveal d2">
+        <div class="phase-img">
+          <span class="phase-num">3</span>
+          <img src="assets/photos/surf2.jpg" alt="Surfer rijdt zelfstandig op een golf">
+        </div>
+        <div class="phase-body">
+          <h3>Ride<br>the Wave</h3>
+          <p>Een jaar lang begeleid surfen met je eigen board én wetsuit. Je bouwt skill, ritme en flow op. Je sluit af met een certificaat.</p>
+          <span class="phase-foot">↳ Officieel certificaat</span>
+        </div>
+      </article>
+      <article class="phase reveal d3">
+        <div class="phase-img">
+          <span class="phase-num">4</span>
+          <img src="assets/photos/crew.jpg" alt="Groep surfers peddelt samen de zee in">
+        </div>
+        <div class="phase-body">
+          <h3>Play it<br>Forward</h3>
+          <p>Opleiding tot surfinstructeur en hulp bij het vinden van een baan. Je geeft je kennis door aan de volgende golf jongeren.</p>
+          <span class="phase-foot">↳ Instructeur + baan</span>
+        </div>
+      </article>
+    </div>
+    <p class="traject-line reveal">Van eerste golf <span class="amber">→</span> tot internationaal instructeur.</p>
+  </div>
+</section>
+
+<!-- ============ VERHALEN ============ -->
+<section class="sec white" id="verhalen">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Verhalen</span>
+      <h2>Wat het water<br>met je doet.</h2>
+      <p class="lead">Geen statistieken, maar echte jongeren. Dit is wat er gebeurt als je in beweging komt.</p>
+    </div>
+
+    <div class="stories">
+      <article class="story reveal">
+        <div class="story-img"><img src="assets/photos/surf2.jpg" alt="Sem surft op een golf"></div>
+        <div class="story-body">
+          <div class="quote-mark">“</div>
+          <p class="q">Op school zat ik altijd in mijn hoofd. In het water hoeft dat niet — daar tel je gewoon mee. De crew werd mijn tweede thuis.</p>
+          <div class="story-name"><span class="dot"></span>Sem <span class="role">· 16, Scheveningen</span></div>
+        </div>
+      </article>
+      <article class="story reveal d1">
+        <div class="story-img"><img src="assets/photos/beach.jpg" alt="Yara als silhouet op het strand bij zonsondergang"></div>
+        <div class="story-body">
+          <div class="quote-mark">“</div>
+          <p class="q">Ik durfde nergens voor te kiezen. Nu sta ik zelf voor een groep beginners. Dat ik dat kan, had ik twee jaar geleden nooit geloofd.</p>
+          <div class="story-name"><span class="dot"></span>Yara <span class="role">· 19, Noordwijk</span></div>
+        </div>
+      </article>
+      <article class="story reveal d2">
+        <div class="story-img"><img src="assets/photos/crew.jpg" alt="Noah peddelt mee met de crew"></div>
+        <div class="story-body">
+          <div class="quote-mark">“</div>
+          <p class="q">Ik kwam binnen zonder plan. Nu heb ik mijn instructeursdiploma en een baan bij een surfschool. Ride the Wave heeft me letterlijk richting gegeven.</p>
+          <div class="story-name"><span class="dot"></span>Noah <span class="role">· 22, Ouddorp</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="pullquote reveal">
+      <img src="assets/photos/wave.jpg" alt="Krachtige golf breekt over een surfer">
+      <div class="pq-inner">
+        <blockquote>"Hier leerde ik niet alleen surfen.<br>Hier leerde ik <span class="amber">opstaan</span>."</blockquote>
+        <cite>— Deelnemer, lichting 2025</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREW ============ -->
+<section class="sec sand" id="crew">
+  <div class="wrap">
+    <div class="crew-grid">
+      <div class="crew-photo reveal">
+        <span class="badge">DE HELDEN</span>
+        <img src="assets/photos/crew.jpg" alt="De crew van Ride the Wave samen op het water">
+      </div>
+      <div class="crew-text reveal d1">
+        <span class="eyebrow">De crew</span>
+        <h2 style="font-size:clamp(2rem,4.6vw,3.2rem);">Vandaag deelnemer.<br>Morgen de held.</h2>
+        <p class="lead" style="margin-top:18px;">Onze instructeurs stonden ooit zelf trillend op hun eerste plank. Juist dáárom zijn ze goud waard: ze weten precies wat een jongere nodig heeft. Dit is de doorstroom die alles drijft.</p>
+        <div class="crew-flow">
+          <span class="step">Deelnemer</span>
+          <span class="arrow">→</span>
+          <span class="step">Crew</span>
+          <span class="arrow">→</span>
+          <span class="step hot">Instructeur</span>
+        </div>
+        <div class="crew-names">
+          <span class="chip"><span class="av">M</span><span>Milan<small>Head coach</small></span></span>
+          <span class="chip"><span class="av">F</span><span>Fenna<small>Instructeur</small></span></span>
+          <span class="chip"><span class="av">J</span><span>Jayden<small>Instructeur</small></span></span>
+          <span class="chip"><span class="av">L</span><span>Liv<small>Crew lead</small></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPONSOREN ============ -->
+<section class="sec deep" id="sponsoren">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow light">Sponsoren</span>
+      <h2>Van donatie<br>naar partnership.</h2>
+      <p class="lead" style="margin:18px auto 0;">Jij geeft niet zomaar geld weg — je investeert in jongeren die straks zelf de golf doorgeven. Kies een pakket en word onderdeel van de beweging.</p>
+    </div>
+
+    <div class="sponsor-intro">
+      <div class="photo reveal"><img src="assets/photos/youth1.jpg" alt="Uitzicht over de Nederlandse kust waar de jongeren surfen"></div>
+      <div class="reveal d1">
+        <h3 style="font-size:1.7rem;color:var(--creme);margin-bottom:14px;">Jouw merk op het strand.</h3>
+        <p class="lead">Elke partner is zichtbaar bij onze sessies, op onze socials en in onze events — en weet exact welke jongeren mede dankzij hen het water op gaan. Concreet, lokaal en met een verhaal dat blijft hangen.</p>
+      </div>
+    </div>
+
+    <div class="tiers">
+      <article class="tier reveal">
+        <span class="tname">BRONS</span>
+        <span class="price">€3.750<small>per jaar</small></span>
+        <p>Geef vijf jongeren een kans om hun eerste golf te pakken.</p>
+        <span class="tline"></span>
+      </article>
+      <article class="tier reveal d1">
+        <span class="tname">ZILVER</span>
+        <span class="price">€7.500<small>per jaar</small></span>
+        <p>Laat een hele lichting een seizoen lang oefenen en doorgroeien.</p>
+        <span class="tline"></span>
+      </article>
+      <article class="tier feature reveal d2">
+        <span class="ribbon">Meest gekozen</span>
+        <span class="tname">GOUD</span>
+        <span class="price">€15.000<small>per jaar</small></span>
+        <p>Geef jongeren een surf home: een vaste plek om te trainen en te groeien.</p>
+        <span class="tline"></span>
+      </article>
+      <article class="tier reveal d3">
+        <span class="tname">PLATINUM</span>
+        <span class="price">€25.000<small>per jaar</small></span>
+        <p>Maak doorstroom mogelijk: jongeren worden instructeur en geven kennis door.</p>
+        <span class="tline"></span>
+      </article>
+    </div>
+
+    <div class="anbi-note reveal">
+      <span class="pill">ANBI erkend</span>
+      Je bijdrage is fiscaal aftrekbaar. Liever een eigen pakket op maat? We denken graag met je mee.
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOE MEE ============ -->
+<section class="sec cream" id="doemee">
+  <div class="wrap">
+    <div class="signup">
+      <div class="signup-copy reveal">
+        <span class="eyebrow">Doe mee</span>
+        <h2>Pak je flow.<br>Het water wacht.</h2>
+        <p class="lead">Jongere die wil starten? Ouder die iemand wil aanmelden? Bedrijf dat partner wil worden? Laat je gegevens achter — we nemen binnen 48 uur contact op.</p>
+        <ul class="signup-perks">
+          <li><span class="tick">✓</span> Volledig kosteloos voor jongeren</li>
+          <li><span class="tick">✓</span> Drie locaties aan de kust</li>
+          <li><span class="tick">✓</span> Een crew die naast je blijft staan</li>
+        </ul>
+      </div>
+
+      <form class="card" id="signupForm" novalidate>
+        <div id="formFields">
+          <h3>Stap in de crew</h3>
+          <p class="formsub">Het kost je 30 seconden. De rest doen wij.</p>
+          <div class="field">
+            <label for="naam">Naam</label>
+            <input type="text" id="naam" name="naam" placeholder="Je voor- en achternaam" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" placeholder="jij@voorbeeld.nl" required autocomplete="email">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="leeftijd">Leeftijd</label>
+              <input type="number" id="leeftijd" name="leeftijd" placeholder="bijv. 16" min="1" max="120">
+            </div>
+            <div class="field">
+              <label for="locatie">Locatie</label>
+              <select id="locatie" name="locatie" required>
+                <option value="" selected disabled>Kies een plek</option>
+                <option>Scheveningen</option>
+                <option>Noordwijk</option>
+                <option>Ouddorp</option>
+                <option>Maakt me niet uit</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Ik ben…</label>
+            <div class="role-group" id="roleGroup">
+              <label class="sel"><input type="radio" name="rol" value="Jongere" checked>Jongere</label>
+              <label><input type="radio" name="rol" value="Ouder">Ouder</label>
+              <label><input type="radio" name="rol" value="Sponsor">Sponsor</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-amber">Meld me aan →</button>
+        </div>
+
+        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+          <div class="ico">🤙</div>
+          <h3>Welkom in de crew!</h3>
+          <p id="successMsg">We hebben je aanmelding binnen. Je hoort binnen 48 uur van ons — hou je inbox in de gaten. Het water wacht.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo">
+          <img src="assets/poppetje-creme.png" alt="Ride the Wave surfer logo">
+          <span class="word">RIDE <span class="amber">THE</span> WAVE</span>
+        </div>
+        <p>Wij geven jongeren van 14 tot 23 jaar de kans om te groeien — van eerste golf tot internationaal instructeur. Kracht, beweging en flow, voor iedereen.</p>
+        <div class="socials" style="margin-top:20px;">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-1.1.05-1.7.24-2.1.4-.5.2-.9.43-1.3.83-.4.4-.63.8-.83 1.3-.16.4-.35 1-.4 2.1C2.6 9.9 2.6 10.3 2.6 12s0 2.1.07 3.3c.05 1.1.24 1.7.4 2.1.2.5.43.9.83 1.3.4.4.8.63 1.3.83.4.16 1 .35 2.1.4 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.43 1.3-.83.4-.4.63-.8.83-1.3.16-.4.35-1 .4-2.1.07-1.2.07-1.6.07-3.3s0-2.1-.07-3.3c-.05-1.1-.24-1.7-.4-2.1-.2-.5-.43-.9-.83-1.3-.4-.4-.8-.63-1.3-.83-.4-.16-1-.35-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 8.1a3.2 3.2 0 100-6.4 3.2 3.2 0 000 6.4zm6.2-8.3a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.8c-.9-.6-1.5-1.6-1.7-2.7h-2.8v11.4c0 1.3-1.1 2.4-2.4 2.4S7.3 15.8 7.3 14.5s1.1-2.4 2.4-2.4c.3 0 .5 0 .8.1V9.3c-.3 0-.5-.1-.8-.1-2.9 0-5.2 2.3-5.2 5.2s2.3 5.2 5.2 5.2 5.2-2.3 5.2-5.2V9c1 .7 2.3 1.2 3.6 1.2V7.4c-.7 0-1.4-.2-1.9-.6z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.8-2.05 3.7-2.05 4 0 4.75 2.6 4.75 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2.05 1.4-2.05 2.8V21H9z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Ontdek</h4>
+        <a href="#traject">Het traject</a>
+        <a href="#verhalen">Verhalen</a>
+        <a href="#crew">De crew</a>
+        <a href="#sponsoren">Sponsoren</a>
+        <a href="#doemee">Doe mee</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="mailto:hoi@ridethewave.nl">hoi@ridethewave.nl</a>
+        <a href="#">Scheveningen</a>
+        <a href="#">Noordwijk</a>
+        <a href="#">Ouddorp</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Ride the Wave. Pak je flow.</span>
+      <span class="anbi"><span class="pill">ANBI</span> Erkend goed doel · Giften fiscaal aftrekbaar</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- Sticky nav background on scroll ---- */
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    if(window.scrollY > 40){ nav.classList.add('scrolled'); }
+    else{ nav.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---- Mobile hamburger ---- */
+  var burger = document.getElementById('hamburger');
+  var links  = document.getElementById('navLinks');
+  function closeMenu(){
+    links.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    burger.setAttribute('aria-label','Menu openen');
+  }
+  burger.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* ---- Role selector visual state ---- */
+  var roleGroup = document.getElementById('roleGroup');
+  roleGroup.querySelectorAll('input[name="rol"]').forEach(function(input){
+    input.addEventListener('change', function(){
+      roleGroup.querySelectorAll('label').forEach(function(l){ l.classList.remove('sel'); });
+      this.closest('label').classList.add('sel');
+    });
+  });
+
+  /* ---- Form submit (no real send) ---- */
+  var form = document.getElementById('signupForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var naam = (document.getElementById('naam').value || '').trim();
+    var rol  = (form.querySelector('input[name="rol"]:checked') || {}).value || '';
+    var msg  = document.getElementById('successMsg');
+    var first = naam ? naam.split(' ')[0] : 'surfer';
+    if(rol === 'Sponsor'){
+      msg.textContent = 'Top, ' + first + '! Bedankt dat je partner wilt worden. We nemen binnen 48 uur contact op om je pakket te bespreken.';
+    } else if(rol === 'Ouder'){
+      msg.textContent = 'Bedankt, ' + first + '! We nemen binnen 48 uur contact op om de aanmelding rond te maken. Het water wacht.';
+    } else {
+      msg.textContent = 'Welkom ' + first + '! We hebben je aanmelding binnen en mailen je binnen 48 uur. Hou je inbox in de gaten — het water wacht.';
+    }
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+    document.getElementById('formSuccess').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  /* ---- Scroll reveal ---- */
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -50px 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
