@@ -113,9 +113,14 @@ section{position:relative;z-index:2}
 
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:18px;border-top:1px solid var(--line)}
-.stat{padding:32px 28px 0 0;border-right:1px solid var(--line)}
+.stat{padding:32px 28px 18px 18px;border-right:1px solid var(--line);border-radius:14px;transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s,box-shadow .35s;cursor:default}
 .stat:last-child{border-right:0}
-.stat .n{font-family:'Anton';font-size:clamp(40px,4.4vw,60px);color:var(--navy);line-height:1}
+.stat:hover{transform:translateY(-6px);background:#fff;box-shadow:0 16px 34px rgba(14,52,63,.12)}
+.stat .n{font-family:'Anton';font-size:clamp(40px,4.4vw,60px);color:var(--navy);line-height:1;display:inline-block;transition:transform .35s cubic-bezier(.2,.7,.2,1),color .35s}
+.stat:hover .n{color:var(--teal);transform:scale(1.06)}
+.stat .n.counting{color:var(--teal)}
+.stat .n.done{animation:statpop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes statpop{0%{transform:scale(1)}40%{transform:scale(1.14)}100%{transform:scale(1)}}
 .sec.sea .stat .n{color:var(--gold-2)}
 .stat .l{font-weight:600;margin-top:10px;color:var(--ink)}.sec.sea .stat .l{color:#fff}
 .stat small{display:block;color:var(--muted);font-weight:400;font-size:13.5px;margin-top:3px}
