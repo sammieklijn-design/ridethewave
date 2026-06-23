@@ -4,6 +4,7 @@
   --navy:#0E343F; --navy-2:#0a2730; --navy-3:#061b22;       /* diepe oceaan */
   --teal:#1C6E7E;                                            /* subtiele zee */
   --gold:#D7A24A; --gold-2:#E6BD6E; --gold-d:#bd8a36;        /* de zon (verfijnd) */
+  --aqua:#2AA39B; --aqua-2:#46c3ba;                          /* oceaan-turquoise accent */
   --cream:#F7F1E6; --sand:#EADFC9; --white:#fff;
   --ink:#22302d; --muted:#67736d; --line:#e7ddcb;
   --maxw:1200px;
@@ -52,7 +53,8 @@ section{position:relative;z-index:2}
 
 /* ---------- hero (gouden-uur foto, editorial) ---------- */
 .hero{position:relative;min-height:94vh;display:flex;align-items:center;color:#fff;overflow:hidden}
-.hero .bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%}
+.hero .bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;animation:kenburns 22s ease-in-out infinite alternate;will-change:transform}
+@keyframes kenburns{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-2%,-2%,0)}}
 .hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,27,34,.82) 0%,rgba(8,27,34,.45) 45%,rgba(8,27,34,.12) 100%)}
 .hero .waves{display:none}
 .hero .wrap{position:relative;width:100%}
@@ -85,7 +87,18 @@ section{position:relative;z-index:2}
 .sec{padding:130px 0}
 .sec.creme{background:var(--cream)}
 .sec.zand{background:var(--sand)}
-.sec.sea{background:var(--navy);color:#fff}
+.sec.sea{background:radial-gradient(120% 90% at 80% 0%,#16505b 0%,var(--navy) 55%,var(--navy-2) 100%);color:#fff}
+/* verfijnd golf-lijn-motief (surf-accent) */
+.waveline{display:block;width:124px;height:12px;margin-top:18px;color:var(--gold)}
+.waveline svg{display:block;width:100%;height:100%}
+/* immersief parallax-beeld */
+.immersive{position:relative;min-height:90vh;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+.immersive .pbg{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover;will-change:transform}
+.immersive .grad{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,27,34,.9) 0%,rgba(8,27,34,.25) 45%,rgba(8,27,34,.5) 100%)}
+.immersive .wrap{position:relative;z-index:2;padding:0 36px 9vh;width:100%;max-width:var(--maxw);margin:0 auto}
+.immersive .eyebrow{color:var(--gold-2)}
+.immersive q{font-family:'Anton';font-size:clamp(28px,4.2vw,60px);line-height:1.06;display:block;quotes:none;max-width:20ch;letter-spacing:.5px}
+.immersive .by{margin-top:18px;color:var(--gold-2);font-weight:600;letter-spacing:.5px}
 .eyebrow{font-family:'Inter';font-weight:600;letter-spacing:3.5px;font-size:12.5px;color:var(--gold-d);text-transform:uppercase;margin-bottom:20px;display:inline-flex;align-items:center;gap:12px}
 .eyebrow::before{content:"";width:30px;height:1px;background:var(--gold)}
 .sec.sea .eyebrow,.sec.zand .eyebrow{color:var(--gold-2)}
