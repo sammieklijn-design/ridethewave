@@ -2,7 +2,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ride the Wave — Het water wacht op jou</title>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 </head><body>
 
 <nav class="nav"><div class="wrap">
@@ -18,16 +18,17 @@
 </div></nav>
 
 <header class="hero">
-  <img class="bg" src="assets/photos/hero.jpg" alt="Surfer in de golf">
-  <div class="veil"></div>
+  <div class="glow"></div>
+  <div class="sun"></div>
+  <svg class="waves" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,150 C300,90 520,180 760,148 C1000,116 1180,200 1440,160 L1440,320 L0,320 Z" fill="#1F7A92" opacity=".9"/>
+    <path d="M0,196 C320,150 540,236 780,196 C1020,156 1200,238 1440,204 L1440,320 L0,320 Z" fill="#155f74"/>
+    <path d="M0,244 C360,206 560,284 800,250 C1040,216 1220,286 1440,254 L1440,320 L0,320 Z" fill="#FBF5EA"/>
+  </svg>
   <div class="wrap">
-    <span class="kicker">Pak je flow</span>
-    <h1>Het water<br>wacht op <em>jou.</em></h1>
-    <p class="tagline">
-      <span>Je hoeft niet de beste te zijn.</span>
-      <span>Je hoeft nog niets te kunnen.</span>
-      <span>Je hoeft alleen die eerste golf te willen pakken.</span>
-    </p>
+    <span class="kicker">Pak je golf</span>
+    <h1>Het water wacht<br>op <em>jou.</em></h1>
+    <p class="tagline">Je hoeft niet de beste te zijn. Je hoeft nog niets te kunnen. Je hoeft alleen die eerste golf te willen pakken.</p>
     <div class="hero-cta">
       <a class="btn btn-terra" href="doe-mee.html">Doe mee — het is kosteloos</a>
       <a class="btn btn-ghost" href="het-programma.html">Bekijk het programma →</a>
@@ -36,12 +37,7 @@
   </div>
 </header>
 
-<div class="band"><div class="row">
-  <span>Kracht <i class="dot">•</i> Beweging <i class="dot">•</i> Flow <i class="dot">•</i> Focus <i class="dot">•</i> Drive <i class="dot">•</i> Verbinding <i class="dot">•</i> Groei <i class="dot">•</i> </span>
-  <span>Kracht <i class="dot">•</i> Beweging <i class="dot">•</i> Flow <i class="dot">•</i> Focus <i class="dot">•</i> Drive <i class="dot">•</i> Verbinding <i class="dot">•</i> Groei <i class="dot">•</i> </span>
-</div></div>
-
-<section class="sec creme">
+<section class="sec creme" style="padding-top:64px">
   <div class="wrap">
     <div class="eyebrow rv">De impact</div>
     <h2 class="rv">Wat de zee met jongeren doet.</h2>
@@ -73,19 +69,18 @@
     <h2 class="rv">Van eerste golf tot eigen verhaal.</h2>
     <p class="lead rv">Vier fasen, stap voor stap. Wij blijven naast je staan — jij bepaalt het tempo.</p>
     <div class="grid g4 rv" style="margin-top:34px">
-      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--moss)">01</div><h3 style="color:var(--sea);font-size:21px;margin:8px 0">Welcome Beachbum</h3><p>10× surfles met de crew. Daarna is je eigen wetsuit van jou.</p></div></div>
-      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--moss)">02</div><h3 style="color:var(--sea);font-size:21px;margin:8px 0">Join the Surf</h3><p>10× board te leen. Daarna is je eigen board van jou.</p></div></div>
-      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--moss)">03</div><h3 style="color:var(--sea);font-size:21px;margin:8px 0">Ride the Wave</h3><p>Een jaar lang begeleid surfen. Met een certificaat op zak.</p></div></div>
-      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--moss)">04</div><h3 style="color:var(--sea);font-size:21px;margin:8px 0">Play it Forward</h3><p>Opleiding tot instructeur + hulp bij het vinden van een baan.</p></div></div>
+      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--ocean)">01</div><h3 style="color:var(--blue);font-size:21px;margin:8px 0">Welcome Beachbum</h3><p>10× surfles met de crew. Daarna is je eigen wetsuit van jou.</p></div></div>
+      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--ocean)">02</div><h3 style="color:var(--blue);font-size:21px;margin:8px 0">Join the Surf</h3><p>10× board te leen. Daarna is je eigen board van jou.</p></div></div>
+      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--ocean)">03</div><h3 style="color:var(--blue);font-size:21px;margin:8px 0">Ride the Wave</h3><p>Een jaar lang begeleid surfen. Met een certificaat op zak.</p></div></div>
+      <div class="card"><div class="pad"><div class="anton" style="font-size:30px;color:var(--ocean)">04</div><h3 style="color:var(--blue);font-size:21px;margin:8px 0">Play it Forward</h3><p>Opleiding tot instructeur + hulp bij het vinden van een baan.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- full-bleed beeldbreak -->
-<section style="position:relative;height:74vh;min-height:500px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;z-index:2">
-  <img src="assets/photos/wave.jpg" alt="Golf op zee" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-  <div style="position:absolute;inset:0;background:linear-gradient(rgba(18,62,74,.55),rgba(210,85,58,.45))"></div>
-  <h2 class="anton rv" style="position:relative;color:#fff;font-size:clamp(42px,9vw,140px);line-height:.92;max-width:18ch;text-shadow:0 8px 40px rgba(0,0,0,.3)">Jouw verhaal<br>begint in <span style="color:var(--yellow)">zee.</span></h2>
+<section class="break">
+  <img src="assets/photos/wave.jpg" alt="Golf op zee">
+  <div class="grad"></div>
+  <h2 class="anton rv">Jouw verhaal<br>begint in <span>zee.</span></h2>
 </section>
 
 <section class="sec sea">
