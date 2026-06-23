@@ -56,6 +56,7 @@ section{position:relative;z-index:2}
 .hero{position:relative;min-height:94vh;display:flex;align-items:center;color:#fff;overflow:hidden}
 .hero .bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;animation:kenburns 22s ease-in-out infinite alternate;will-change:transform}
 @keyframes kenburns{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-2%,-2%,0)}}
+.hero video.vbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .hero .veil{position:absolute;inset:0;background:
   radial-gradient(60% 80% at 90% 78%,rgba(238,140,68,.34),rgba(217,83,58,.14) 44%,transparent 64%),
   linear-gradient(90deg,rgba(8,27,34,.84) 0%,rgba(8,27,34,.46) 48%,rgba(8,27,34,.14) 100%)}
