@@ -1,14 +1,15 @@
-/* Ride the Wave — design system v9 : ZON BOVEN ZEE (from scratch)
-   Hoofdkleuren: BLAUW (zee) + GEEL (zon). Rood/oranje ALLEEN in de zon-gradient. Bruin/zand ondergeschikt. */
+/* Ride the Wave — design system v10 : SUNSET-GRADIENT (festival-stijl)
+   Blauw (zee) + geel (zon) hoofd; rood/oranje ALLEEN in de gradient-overgang (de zon). Echte foto's. Geen losse zonnen. */
 :root{
-  --blue:#0F3D4E; --blue-2:#0a2c39; --blue-3:#06202b;        /* zee (dominant) */
-  --ocean:#1F7A92; --ocean-2:#36A0BC;                         /* lichtere zee */
-  --yellow:#F6C945; --yellow-2:#FFD86A; --yellow-d:#e3b531;   /* zon (dominant accent) */
-  --orange:#EE8C44; --red:#D2553A;                            /* alleen in zon-gradient */
-  --sand:#E2CBA0; --brown:#9C7A4E;                            /* ondergeschikt */
+  --blue:#0F3D4E; --blue-2:#0a2c39; --blue-3:#06202b;
+  --ocean:#1F7A92; --ocean-2:#36A0BC;
+  --yellow:#F6C945; --yellow-2:#FFD86A; --yellow-d:#e3b531;
+  --orange:#EE8C44; --red:#D2553A;
+  --sand:#E7D6B8; --sand-2:#EFE3C6; --brown:#9C7A4E;
   --creme:#FBF5EA; --white:#fff;
   --ink:#1b3138; --muted:#5d7077; --line:#e7ddc6;
-  --sun:radial-gradient(circle at 50% 42%, #FCE695 0%, #F6C945 36%, #EE8C44 68%, #D2553A 100%);
+  /* de zon-overgang: zee -> dusk -> rood -> oranje -> geel -> zand */
+  --sunset:linear-gradient(180deg,#0F3D4E 0%,#243f60 20%,#7a3f57 40%,#C2553F 58%,#EE8C44 74%,#F6C945 89%,#EBD7AE 100%);
   --maxw:1180px; --r:22px; --sh:0 18px 48px rgba(15,61,78,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -21,15 +22,15 @@ h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.4
 section{position:relative;z-index:2}
 ::selection{background:var(--yellow);color:var(--blue)}
 
-/* ---------- buttons (geel = zon) ---------- */
+/* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;gap:.5em;font-family:'Inter';font-weight:800;font-size:15px;letter-spacing:.2px;
   padding:15px 30px;border-radius:999px;transition:transform .16s,box-shadow .16s,background .16s;cursor:pointer;border:2px solid transparent}
 .btn:hover{transform:translateY(-2px)}
-.btn-terra{background:var(--yellow);color:var(--blue);box-shadow:0 6px 0 var(--yellow-d)}      /* primary = zon-geel */
+.btn-terra{background:var(--yellow);color:var(--blue);box-shadow:0 6px 0 var(--yellow-d)}
 .btn-terra:hover{background:var(--yellow-2);box-shadow:0 4px 0 var(--yellow-d)}
 .btn-yellow{background:var(--yellow);color:var(--blue);box-shadow:0 6px 0 var(--yellow-d)}
 .btn-yellow:hover{background:var(--yellow-2);box-shadow:0 4px 0 var(--yellow-d)}
-.btn-ghost{background:transparent;border-color:rgba(255,255,255,.6);color:#fff}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,.65);color:#fff}
 .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff}
 .btn-ghost.dark{border-color:var(--blue);color:var(--blue)}
 
@@ -54,37 +55,53 @@ section{position:relative;z-index:2}
   .nav-links .btn{margin:12px 32px}.nav-toggle{display:block}
 }
 
-/* ---------- HERO: ontworpen zon boven zee ---------- */
-.hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:flex-start;color:#fff;
-  background:linear-gradient(180deg,#0c4f66 0%,#0F3D4E 46%,#0a2c39 100%)}
-.hero .sun{position:absolute;left:50%;top:30%;width:min(56vh,520px);aspect-ratio:1;transform:translate(-50%,-30%);
-  border-radius:50%;background:var(--sun);box-shadow:0 0 120px 30px rgba(246,201,69,.35);z-index:1}
-.hero .glow{position:absolute;inset:0;background:radial-gradient(120% 70% at 50% 34%,rgba(246,201,69,.22),transparent 60%);z-index:1}
-.hero .waves{position:absolute;left:0;right:0;bottom:0;width:100%;height:38vh;z-index:2;display:block}
-.hero .wrap{position:relative;z-index:3;width:100%;padding-top:20vh;text-align:center}
-.hero .kicker{display:inline-flex;align-items:center;gap:11px;font-family:'Inter';font-weight:800;letter-spacing:3px;font-size:13px;text-transform:uppercase;color:#0F3D4E;background:var(--yellow);padding:7px 16px;border-radius:999px;margin-bottom:24px}
-.hero h1{font-size:clamp(56px,11vw,168px);line-height:.9;letter-spacing:1px;text-shadow:0 6px 40px rgba(0,0,0,.3)}
+/* ---------- hero (echte foto + sunset-waas) ---------- */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero .bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;transform:scale(1.03)}
+.hero .veil{position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(15,61,78,.30) 0%,rgba(210,85,58,.20) 44%,rgba(15,61,78,.50) 70%,rgba(8,40,53,.92) 100%)}
+.hero .wrap{position:relative;padding-bottom:96px;padding-top:120px;width:100%}
+.kicker{display:inline-flex;align-items:center;gap:11px;font-family:'Inter';font-weight:800;letter-spacing:2.5px;font-size:13px;text-transform:uppercase;color:var(--blue);background:var(--yellow);padding:7px 16px;border-radius:999px;margin-bottom:22px}
+.hero h1{font-size:clamp(54px,9.5vw,138px);max-width:14ch;letter-spacing:.5px;text-shadow:0 4px 34px rgba(0,0,0,.3)}
 .hero h1 em{font-style:normal;color:var(--yellow)}
-.hero .tagline{margin:22px auto 0;font-size:clamp(16px,1.8vw,21px);font-weight:500;max-width:40ch;color:#dcebef}
-.hero .tagline{color:#d7ecf2}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:32px;position:relative;z-index:4}
-.hero-proof{margin-top:22px;font-size:14px;color:#bcd8e0}
+.tagline{margin:26px 0 4px;font-size:clamp(16px,1.7vw,21px);font-weight:500;max-width:48ch;color:#edf4f1}
+.tagline span{display:block}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.hero-proof{margin-top:28px;font-size:14px;color:#d3e6e2;letter-spacing:.3px}
 .hero-proof b{color:var(--yellow);font-weight:800}
-@media(max-width:700px){.hero .sun{top:24%;width:54vw}.hero .wrap{padding-top:17vh}}
 
-/* page hero (zon-gloed) */
-.phero{background:linear-gradient(155deg,var(--blue) 0%,var(--blue-2) 55%,#123f53 100%);color:#fff;padding:104px 0 100px;position:relative;overflow:hidden}
-.phero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:var(--sun);opacity:.9;filter:blur(2px);box-shadow:0 0 90px 20px rgba(246,201,69,.25)}
+/* page hero (gradient, geen losse zon) */
+.phero{background:var(--sunset);color:#fff;padding:104px 0 96px;position:relative;overflow:hidden}
 .phero .wrap{position:relative;z-index:2}
-.phero h1{font-size:clamp(46px,7.5vw,98px);max-width:16ch}
-.phero h1 em{font-style:normal;color:var(--yellow)}
-.phero p{margin-top:20px;max-width:52ch;font-size:19px;color:#cfe4ea}
+.phero h1{font-size:clamp(46px,7.5vw,98px);max-width:16ch;text-shadow:0 4px 24px rgba(0,0,0,.2)}
+.phero h1 em{font-style:normal;color:#fff}
+.phero p{margin-top:20px;max-width:52ch;font-size:19px;color:#fff;opacity:.94}
+
+/* ---------- FESTIVAL-sectie: sunset-gradient + witomlijste fotokaarten ---------- */
+.festival{background:var(--sunset);color:#fff;padding:120px 0 150px;position:relative}
+.festival .head{text-align:center;max-width:62ch;margin:0 auto 54px}
+.festival .eyebrow{color:#fff;opacity:.85}
+.festival h2{color:#fff;font-size:clamp(34px,5vw,60px);text-shadow:0 4px 24px rgba(0,0,0,.18)}
+.festival .lead{color:#fff;opacity:.92;margin:14px auto 0}
+.fcards{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+@media(max-width:860px){.fcards{grid-template-columns:1fr;gap:40px;max-width:460px;margin:0 auto}}
+.fitem{text-align:center}
+.fitem .frame{background:#fff;padding:10px;border-radius:18px;box-shadow:0 22px 50px rgba(0,0,0,.22);transition:transform .2s}
+.fitem:nth-child(odd) .frame{transform:rotate(-1.2deg)}
+.fitem:nth-child(even) .frame{transform:rotate(1.2deg)}
+.fitem:hover .frame{transform:rotate(0) translateY(-4px)}
+.fitem .frame img{width:100%;height:248px;object-fit:cover;border-radius:11px;display:block}
+.fitem h3{font-size:27px;margin:24px 0 10px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.18)}
+.fitem p{color:#fff;opacity:.92;font-size:15px;max-width:34ch;margin:0 auto}
+/* golvende zand-rand onderaan */
+.festival::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:60px;background-repeat:no-repeat;background-size:100% 100%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cpath d='M0,38 C200,68 380,12 600,36 C820,60 1020,14 1240,36 C1340,46 1400,30 1440,34 L1440,70 L0,70 Z' fill='%23FBF5EA'/%3E%3C/svg%3E")}
 
 /* ---------- sfeerwoorden band ---------- */
 .band{background:var(--blue-2);overflow:hidden;padding:20px 0}
 .band .row{display:flex;white-space:nowrap;animation:scroll 42s linear infinite;font-family:'Anton';font-size:26px;letter-spacing:3px;color:var(--yellow);text-transform:uppercase}
 .band .row span{display:inline-flex;align-items:center;gap:30px;padding-right:30px}
-.band .row .dot{color:var(--ocean-2);font-style:normal}
+.band .row .dot{color:var(--orange);font-style:normal}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ---------- sections ---------- */
@@ -163,21 +180,20 @@ section{position:relative;z-index:2}
 .role.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
 .thanks{display:none;background:var(--blue);color:#fff;border-radius:16px;padding:24px;margin-top:20px;font-weight:600}
 
-/* CTA strip (de zon) */
-.ctastrip{background:linear-gradient(150deg,var(--blue) 0%,var(--orange) 105%,var(--red) 130%);color:#fff;text-align:center;padding:128px 0 104px;position:relative;overflow:hidden}
-.ctastrip::after{content:"";position:absolute;left:50%;top:-180px;width:520px;height:520px;transform:translateX(-50%);border-radius:50%;background:var(--sun);opacity:.85}
+/* CTA strip (sunset-gradient, geen losse zon) */
+.ctastrip{background:var(--sunset);color:#fff;text-align:center;padding:124px 0 104px;position:relative;overflow:hidden}
 .ctastrip .wrap{position:relative;z-index:2}
-.ctastrip h2{font-size:clamp(36px,5.5vw,68px);margin-bottom:12px;color:#fff}
-.ctastrip p{max-width:50ch;margin:0 auto 32px;font-size:19px;color:#eaf4f3}
+.ctastrip h2{font-size:clamp(36px,5.5vw,68px);margin-bottom:12px;color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.2)}
+.ctastrip p{max-width:50ch;margin:0 auto 32px;font-size:19px;color:#fff;opacity:.94}
 
-/* golf-divider (zee) bovenaan donkere secties */
-.sec.sea::before, .ctastrip::before{content:"";position:absolute;top:-1px;left:0;right:0;height:46px;background-repeat:no-repeat;background-size:100% 100%;z-index:3;
+/* golf-divider bovenaan donkere/sea secties */
+.sec.sea::before{content:"";position:absolute;top:-1px;left:0;right:0;height:46px;background-repeat:no-repeat;background-size:100% 100%;z-index:3;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0,30 C180,62 360,2 540,28 C720,54 900,6 1080,30 C1260,52 1380,18 1440,28 L1440,0 L0,0 Z' fill='%23FBF5EA'/%3E%3C/svg%3E")}
 
 /* full-bleed break */
 .break{position:relative;min-height:72vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;z-index:2}
 .break img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.break .grad{position:absolute;inset:0;background:linear-gradient(120deg,rgba(15,61,78,.66),rgba(31,122,146,.4))}
+.break .grad{position:absolute;inset:0;background:linear-gradient(120deg,rgba(15,61,78,.62),rgba(210,85,58,.40))}
 .break h2{position:relative;color:#fff;font-size:clamp(42px,9vw,140px);line-height:.92;max-width:18ch;text-shadow:0 8px 40px rgba(0,0,0,.32)}
 .break h2 span{color:var(--yellow)}
 
