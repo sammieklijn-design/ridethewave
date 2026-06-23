@@ -3,7 +3,8 @@
 :root{
   --navy:#0E343F; --navy-2:#0a2730; --navy-3:#061b22;       /* diepe oceaan */
   --teal:#1C6E7E;                                            /* subtiele zee */
-  --gold:#D7A24A; --gold-2:#E6BD6E; --gold-d:#bd8a36;        /* de zon (verfijnd) */
+  --gold:#F4BD2A; --gold-2:#FBD75E; --gold-d:#d39f1c;        /* de zon — feller geel */
+  --red:#D9533A; --red-d:#bd4329; --orange:#EE8C44;          /* rood terug + oranje brug */
   --aqua:#2AA39B; --aqua-2:#46c3ba;                          /* oceaan-turquoise accent */
   --cream:#F7F1E6; --sand:#EADFC9; --white:#fff;
   --ink:#22302d; --muted:#67736d; --line:#e7ddcb;
@@ -55,7 +56,9 @@ section{position:relative;z-index:2}
 .hero{position:relative;min-height:94vh;display:flex;align-items:center;color:#fff;overflow:hidden}
 .hero .bg{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;animation:kenburns 22s ease-in-out infinite alternate;will-change:transform}
 @keyframes kenburns{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.16) translate3d(-2%,-2%,0)}}
-.hero .veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,27,34,.82) 0%,rgba(8,27,34,.45) 45%,rgba(8,27,34,.12) 100%)}
+.hero .veil{position:absolute;inset:0;background:
+  radial-gradient(60% 80% at 90% 78%,rgba(238,140,68,.34),rgba(217,83,58,.14) 44%,transparent 64%),
+  linear-gradient(90deg,rgba(8,27,34,.84) 0%,rgba(8,27,34,.46) 48%,rgba(8,27,34,.14) 100%)}
 .hero .waves{display:none}
 .hero .wrap{position:relative;width:100%}
 .kicker{display:inline-flex;align-items:center;gap:14px;font-family:'Inter';font-weight:600;letter-spacing:3.5px;font-size:12.5px;text-transform:uppercase;color:var(--gold-2);margin-bottom:26px}
@@ -69,7 +72,7 @@ section{position:relative;z-index:2}
 
 /* page hero */
 .phero{background:var(--navy);color:#fff;padding:130px 0 110px;position:relative;overflow:hidden}
-.phero::after{content:"";position:absolute;right:8%;top:-160px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(215,162,74,.35);box-shadow:0 0 120px rgba(215,162,74,.12)}
+.phero::after{content:"";position:absolute;right:-3%;top:-180px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(244,189,42,.5),rgba(238,140,68,.32) 46%,rgba(217,83,58,.16) 68%,transparent 76%);filter:blur(2px)}
 .phero .wrap{position:relative;z-index:2}
 .phero .kicker{color:var(--gold-2)}
 .phero h1{font-size:clamp(44px,7vw,92px);max-width:16ch}
@@ -119,7 +122,7 @@ section{position:relative;z-index:2}
 @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.stat{border-right:0;padding-right:0}}
 
 /* editorial photo cards (vervangt de festival-regenboog) */
-.festival{background:var(--navy);color:#fff;padding:130px 0}
+.festival{background:radial-gradient(90% 70% at 82% 8%,rgba(238,140,68,.26),rgba(217,83,58,.1) 42%,transparent 60%),var(--navy);color:#fff;padding:130px 0}
 .festival::after{content:none}
 .festival .head{max-width:64ch;margin:0 0 56px}
 .festival .eyebrow{color:var(--gold-2)}
@@ -139,8 +142,8 @@ section{position:relative;z-index:2}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 @media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
-.card{background:var(--white);border:1px solid var(--line);border-radius:3px;overflow:hidden;transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-3px);box-shadow:0 24px 50px rgba(14,52,63,.10)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 14px 34px rgba(14,52,63,.10);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-5px);box-shadow:0 30px 60px rgba(14,52,63,.18)}
 .card .pad{padding:30px 30px 32px}
 .card img{width:100%;height:220px;object-fit:cover}
 .card h3{font-size:22px;color:var(--navy);margin-bottom:10px;letter-spacing:.4px}
@@ -167,15 +170,15 @@ section{position:relative;z-index:2}
 @media(max-width:600px){.pull{padding-left:26px}}
 
 /* sponsor tiers */
-.tier{background:var(--white);border:1px solid var(--line);border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
+.tier{background:var(--white);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 34px rgba(14,52,63,.09)}
 .tier .top{background:var(--navy)!important;color:#fff;padding:26px;font-family:'Anton';font-size:24px;text-align:center;letter-spacing:1.5px}
 .tier .price{font-family:'Anton';font-size:36px;color:var(--navy);text-align:center;padding:28px 0 8px}
 .tier .desc{padding:0 28px 26px;color:var(--muted);text-align:center;font-size:15px;flex:1}
 .tier .cta{padding:0 28px 32px;text-align:center}
-.tier.hi{border-color:var(--gold);box-shadow:0 24px 50px rgba(14,52,63,.1)}
-.tier.hi .top{background:var(--gold)!important;color:var(--navy)}
-.tier.hi .price{color:var(--gold-d)}
-.badge-best{background:var(--gold);color:var(--navy);font-family:'Inter';font-weight:700;font-size:11.5px;letter-spacing:2px;text-align:center;padding:9px;text-transform:uppercase}
+.tier.hi{border-color:var(--red);box-shadow:0 30px 60px rgba(217,83,58,.18);transform:translateY(-6px)}
+.tier.hi .top{background:var(--red)!important;color:#fff}
+.tier.hi .price{color:var(--red)}
+.badge-best{background:var(--red);color:#fff;font-family:'Inter';font-weight:700;font-size:11.5px;letter-spacing:2px;text-align:center;padding:9px;text-transform:uppercase}
 
 /* form */
 .form{background:var(--white);border:1px solid var(--line);border-radius:3px;padding:42px;max-width:680px}
@@ -190,7 +193,7 @@ section{position:relative;z-index:2}
 
 /* CTA strip */
 .ctastrip{background:var(--navy);color:#fff;text-align:center;padding:140px 0;position:relative;overflow:hidden}
-.ctastrip::before{content:"";position:absolute;left:50%;top:-220px;width:440px;height:440px;transform:translateX(-50%);border-radius:50%;border:1px solid rgba(215,162,74,.4);box-shadow:0 0 140px rgba(215,162,74,.14)}
+.ctastrip::before{content:"";position:absolute;left:50%;top:-240px;width:600px;height:600px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(244,189,42,.42),rgba(238,140,68,.3) 44%,rgba(217,83,58,.16) 66%,transparent 74%);filter:blur(2px)}
 .ctastrip .wrap{position:relative;z-index:2}
 .ctastrip h2{font-size:clamp(36px,5.2vw,66px);margin-bottom:14px;color:#fff;letter-spacing:.8px}
 .ctastrip p{max-width:50ch;margin:0 auto 32px;font-size:19px;color:#cdd9d6}
